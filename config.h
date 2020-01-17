@@ -5,7 +5,17 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=40:antialias=true:autohint=true";
+//static char *font = "Liberation Mono:pixelsize=30:antialias=true:autohint=true";
+static char *font = "DejaVu Sans Mono Nerd Font:pixelsize=30:antialias=true:autohint=true";
+/* Spare fonts */
+static char *font2[] = {
+	"AppleColorEmoji:pixelsize=30:antialias=true",
+    "DejaVuSansMono Nerd Font Mono:pixelsize=30:antialias=true:autohint=true",
+	"Lucida Mac:pixelsize=30:antialias=true:autohint=true",
+	"EmojiOne:pixelsize=30:antialias=true",
+	".Apple Color Emoji UI:pixelsize=30:antialias=true",
+};
+
 static int borderpx = 2;
 
 /*
@@ -172,6 +182,8 @@ static MouseShortcut mshortcuts[] = {
 };
 
 /* Internal keyboard shortcuts. */
+#define EQUL 0x3d
+#define MINS 0x2d
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
@@ -193,13 +205,13 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ ControlMask,              EQUL,       zoom,           {.f = +1} },
+	{ ControlMask,              MINS,        zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	//{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	//{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
-	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
+	{ Mod1Mask,             XK_c,           clipcopy,       {.i =  0} },
+	{ Mod1Mask,             XK_v,           clippaste,      {.i =  0} },
     // no means
 	//{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	//{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
