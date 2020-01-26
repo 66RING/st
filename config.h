@@ -9,14 +9,14 @@
 static char *font = "DejaVu Sans Mono Nerd Font:pixelsize=30:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-	"AppleColorEmoji:pixelsize=30:antialias=true",
-    "DejaVuSansMono Nerd Font Mono:pixelsize=30:antialias=true:autohint=true",
+	"Source Han Sans CN:pixelsize=30:antialias=true",
+	"Source Han Serif CN:pixelsize=30:antialias=true",
+	"Source Code Pro for Powerline:pixelsize=30:antialias=true",
+	"Source Code Pro for Powerline:pixelsize=30:antialias=true",
 	"Lucida Mac:pixelsize=30:antialias=true:autohint=true",
-	"EmojiOne:pixelsize=30:antialias=true",
-	".Apple Color Emoji UI:pixelsize=30:antialias=true",
 };
 
-static int borderpx = 2;
+static int borderpx = 8;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -185,6 +185,7 @@ static MouseShortcut mshortcuts[] = {
 #define EQUL 0x3d
 #define MINS 0x2d
 #define MODKEY Mod1Mask
+#define SUPER Mod4Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 // from @LukeSmithxyz
@@ -216,6 +217,7 @@ static Shortcut shortcuts[] = {
 	//{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	//{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ SUPER|MODKEY,         XK_Return,      newterm,        {.i =  0} },
 	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
 	{ MODKEY,               XK_i,           kscrollup,      {.i =  1} },
 	{ MODKEY,               XK_k,           kscrolldown,    {.i =  1} },
