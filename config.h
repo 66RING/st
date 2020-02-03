@@ -10,11 +10,11 @@ static char *font = "DejaVu Sans Mono Nerd Font:pixelsize=30:antialias=true:auto
 /* Spare fonts */
 static char *font2[] = {
 	//"Apple Color Emoji:pixelsize=30:antialias=true",
+	"SauceCodePro Nerd Font Mono:pixelsize=30:antialias=true",
+	"Source Code Pro:pixelsize=30:antialias=true",
 	"Font Awesome 5 Free:pixelsize=30:antialias=true",
 	"siji:pixelsize=30:antialias=true",
 	"Matarial:pixelsize=30:antialias=true",
-	"SauceCodePro Nerd Font Mono:pixelsize=30:antialias=true",
-	"Source Code Pro:pixelsize=30:antialias=true",
 	"Source Han Sans CN:pixelsize=30:antialias=true",
 	"Source Han Serif CN:pixelsize=30:antialias=true",
 };
