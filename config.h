@@ -10,7 +10,7 @@ static char *font = "DejaVu Sans Mono Nerd Font:pixelsize=30:antialias=true:auto
 /* Spare fonts */
 static char *font2[] = {
 	//"Inconsolata for Powerline:pixelsize=30:antialias=true:autohint=true",
-	//"Noto Color Emoji:pixelsize=30:antialias=true:autohint=true",
+	"DejaVu Sans Mono for Powerline:pixelsize=30:antialias=true:autohint=true",
 	//"JoyPixels:pixelsize=30:antialias=true:autohint=true",
 	"Source Han Sans CN:pixelsize=30:antialias=true:autohint=true",
 	"Source Han Serif CN:pixelsize=30:antialias=true:autohint=true",
