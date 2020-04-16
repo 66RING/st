@@ -98,13 +98,39 @@ float alpha = 0.8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 
+
+
+/*
+[0] = "#000000", 
+[1] = "#ff5555", 
+[2] = "#50fa7b", 
+[3] = "#f1fa8c", 
+[4] = "#bd93f9", 
+[5] = "#ff79c6", 
+[6] = "#8be9fd", 
+[7] = "#bbbbbb", 
+
+[8]  = "#44475a", 
+[9]  = "#ff5555", 
+[10] = "#50fa7b", 
+[11] = "#f1fa8c", 
+[12] = "#bd93f9", 
+[13] = "#ff79c6", 
+[14] = "#8be9fd", 
+[15] = "#ffffff", 
+
+[256] = "#282a36", 
+[257] = "#f8f8f2", 
+*/
+ 
+
   /* 8 normal colors */
   [0] = "#000000", /* black   */
   [1] = "#ff5555", /* red     */
   [2] = "#50fa7b", /* green   */
-  [3] = "#f1fa8c", /* yellow  */
-  [4] = "#bd93f9", /* blue    */
-  [5] = "#ff79c6", /* magenta */
+  [3] = "#F7D325", /* yellow  */
+  [4] = "#6095C5", /* blue    */
+  [5] = "#E5B0FF", /* magenta */
   [6] = "#8be9fd", /* cyan    */
   [7] = "#bbbbbb", /* white   */
 
@@ -113,14 +139,14 @@ static const char *colorname[] = {
   [9]  = "#ff5555", /* red     */
   [10] = "#50fa7b", /* green   */
   [11] = "#f1fa8c", /* yellow  */
-  [12] = "#bd93f9", /* blue    */
+  [12] = "#98CBFE", /* blue    */
   [13] = "#ff79c6", /* magenta */
   [14] = "#8be9fd", /* cyan    */
   [15] = "#ffffff", /* white   */
 
   /* special colors */
   [256] = "#282a36", /* background */
-  [257] = "#f8f8f2", /* foreground */
+  [257] = "#E7E8E9", /* foreground */
 };
 
 /*
@@ -217,7 +243,6 @@ static Shortcut shortcuts[] = {
 	//{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	//{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ SUPER|MODKEY,         XK_Return,      newterm,        {.i =  0} },
 	{ MODKEY,               XK_l,           copyurl,        {.i =  0} },
 	{ MODKEY,               XK_i,           kscrollup,      {.i =  1} },
 	{ MODKEY,               XK_k,           kscrolldown,    {.i =  1} },
