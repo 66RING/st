@@ -3,8 +3,10 @@
 
 ## color emoji
 
-- dependency
+- emoji fonts
     - ttf-twemoji-color
     - ttf-joypixels
+    - ttf-apple-emoji
+- dependency
     - libxft-bgra
 

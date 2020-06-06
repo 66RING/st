@@ -6,15 +6,17 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 //static char *font = "Liberation Mono:pixelsize=30:antialias=true:autohint=true";
-static char *font = "DejaVu Sans Mono Nerd Font:pixelsize=30:antialias=true:autohint=true";
+static char *font = "DejaVu Sans Mono Nerd Font:pixelsize=24:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-	"DejaVu Sans Mono for Powerline:pixelsize=30:antialias=true:autohint=true",
-	"Twitter Color Emoji:pixelsize=30:antialias=true:autohint=true",
-	"JoyPixels:pixelsize=30:antialias=true:autohint=true",
-	"Inconsolata for Powerline:pixelsize=30:antialias=true:autohint=true",
-	"Source Han Sans CN:pixelsize=30:antialias=true:autohint=true",
-	"Source Han Serif CN:pixelsize=30:antialias=true:autohint=true",
+	"DejaVu Sans Mono for Powerline:pixelsize=24:antialias=true:autohint=true",
+	"Apple Color Emoji:pixelsize=24:antialias=true:autohint=true",
+	//"Twitter Color Emoji:pixelsize=24:antialias=true:autohint=true",
+	//"twemoji:pixelsize=24:antialias=true:autohint=true",
+	//"JoyPixels:pixelsize=24:antialias=true:autohint=true",
+	"Inconsolata for Powerline:pixelsize=24:antialias=true:autohint=true",
+	"Source Han Sans CN:pixelsize=24:antialias=true:autohint=true",
+	"Source Han Serif CN:pixelsize=24:antialias=true:autohint=true",
 };
 
 static int borderpx = 8;
