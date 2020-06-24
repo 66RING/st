@@ -10,9 +10,9 @@ static char *font = "DejaVu Sans Mono Nerd Font:pixelsize=24:antialias=true:auto
 /* Spare fonts */
 static char *font2[] = {
 	"DejaVu Sans Mono for Powerline:pixelsize=24:antialias=true:autohint=true",
+	"Twitter Color Emoji:pixelsize=24:antialias=true:autohint=true",
+	"twemoji:pixelsize=24:antialias=true:autohint=true",
 	"Apple Color Emoji:pixelsize=24:antialias=true:autohint=true",
-	//"Twitter Color Emoji:pixelsize=24:antialias=true:autohint=true",
-	//"twemoji:pixelsize=24:antialias=true:autohint=true",
 	//"JoyPixels:pixelsize=24:antialias=true:autohint=true",
 	"Inconsolata for Powerline:pixelsize=24:antialias=true:autohint=true",
 	"Source Han Sans CN:pixelsize=24:antialias=true:autohint=true",
@@ -134,7 +134,7 @@ static const char *colorname[] = {
   [3] = "#edbf69", /* yellow  */
   [4] = "#98CBFE", /* blue    */
   [5] = "#bd93f9", /* magenta */
-  [6] = "#70c0ba", /* cyan    */
+  [6] = "#2bcec2", /* cyan    */
   [7] = "#bbbbbb", /* white   */
 
   /* 8 bright colors */
@@ -142,9 +142,9 @@ static const char *colorname[] = {
   [9]  = "#ff5555", /* red     */
   [10] = "#50fa7b", /* green   */
   [11] = "#f1fa8c", /* yellow  */
-  [12] = "#8be9fd", /* blue    */
+  [12] = "#61afef", /* blue    */
   [13] = "#ff79c6", /* magenta */
-  [14] = "#2bcec2", /* cyan    */
+  [14] = "#8be9fd", /* cyan    */
   [15] = "#ffffff", /* white   */
 
   /* special colors */
