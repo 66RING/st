@@ -87,7 +87,6 @@ void printscreen(const Arg *);
 void printsel(const Arg *);
 void sendbreak(const Arg *);
 void toggleprinter(const Arg *);
-void copyurl(const Arg *);
 
 int tattrset(int);
 void tnew(int, int);
@@ -119,10 +118,12 @@ void externalpipe(const Arg *);
 
 /* config.h globals */
 extern char *utmp;
+extern char *scroll;
 extern char *stty_args;
 extern char *vtiden;
 extern wchar_t *worddelimiters;
 extern int allowaltscreen;
+extern int allowwindowops;
 extern char *termname;
 extern unsigned int tabspaces;
 extern unsigned int defaultfg;

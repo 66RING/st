@@ -21,13 +21,15 @@ static int borderpx = 4;
 /*
  * What program is execed by st depends of these precedence rules:
  * 1: program passed with -e
- * 2: utmp option
+ * 2: scroll and/or utmp
  * 3: SHELL environment variable
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
 static char *shell = "/bin/sh";
 char *utmp = NULL;
+/* scroll program: to enable use a string like "scroll" */
+char *scroll = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
 /* identification sequence returned in DA and DECID */
@@ -51,9 +53,18 @@ static unsigned int tripleclicktimeout = 600;
 /* alt screens */
 int allowaltscreen = 1;
 
-/* frames per second st should at maximum draw to the screen */
-static unsigned int xfps = 120;
-static unsigned int actionfps = 30;
+/* allow certain non-interactive (insecure) window operations such as:
+   setting the clipboard text */
+int allowwindowops = 0;
+
+/*
+ * draw latency range in ms - from new content/keypress/etc until drawing.
+ * within this range, st draws when content stops arriving (idle). mostly it's
+ * near minlatency, but it waits longer for slow updates to avoid partial draw.
+ * low minlatency will tear/flicker more, as it can "detect" idle too early.
+ */
+static double minlatency = 8;
+static double maxlatency = 33;
 
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
@@ -97,33 +108,6 @@ float alpha = 0.75;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-
-
-
-/*
-[0] = "#000000", 
-[1] = "#ff5555", 
-[2] = "#50fa7b", 
-[3] = "#f1fa8c", 
-[4] = "#bd93f9", 
-[5] = "#ff79c6", 
-[6] = "#8be9fd", 
-[7] = "#bbbbbb", 
-
-[8]  = "#44475a", 
-[9]  = "#ff5555", 
-[10] = "#50fa7b", 
-[11] = "#f1fa8c", 
-[12] = "#bd93f9", 
-[13] = "#ff79c6", 
-[14] = "#8be9fd", 
-[15] = "#ffffff", 
-
-[256] = "#282a36", 
-[257] = "#f8f8f2", 
-*/
- 
-
   /* 8 normal colors */
   [0] = "#000000", /* black   */
   [1] = "#d54e53", /* red     */
@@ -147,11 +131,13 @@ static const char *colorname[] = {
   /* special colors */
   [256] = "#2c323b", /* background */
   [257] = "#E7E8E9", /* foreground */
+
 };
+
 
 /*
  * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
+ * foreground, background, cursor
  */
 unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
@@ -159,15 +145,27 @@ static unsigned int defaultcs = 257;
 static unsigned int defaultrcs = 257;
 
 /*
- * Default shape of cursor
- * 1: Blinking Block ("█")
- * 2: Block ("█")
- * 3: Blinking Underline ("_")
- * 4: Underline ("_")
- * 6: Bar ("|")
- * 7: Snowman ("☃")
+ * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h4-Functions-using-CSI-_-ordered-by-the-final-character-lparen-s-rparen:CSI-Ps-SP-q.1D81
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
  */
-static unsigned int cursorshape = 2;
+unsigned int defaultitalic = 7;
+unsigned int defaultunderline = 7;
+/*
+ * Default style of cursor
+ * 0: Blinking block
+ * 1: Blinking block (default)
+ * 2: Steady block ("█")
+ * 3: Blinking underline
+ * 4: Steady underline ("_")
+ * 5: Blinking bar
+ * 6: Steady bar ("|")
+ * 7: Blinking st cursor
+ * 8: Steady st cursor
+ */
+static unsigned int cursorstyle = 1;
+static Rune stcursor = 0x2603; /* snowman (U+2603) */
 
 /*
  * Default columns and rows numbers
@@ -203,7 +201,9 @@ static uint forcemousemod = ShiftMask;
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
@@ -211,7 +211,6 @@ static MouseShortcut mshortcuts[] = {
 #define EQUL 0x3d
 #define MINS 0x2d
 #define MODKEY Mod1Mask
-#define SUPER Mod4Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 // from @LukeSmithxyz
@@ -219,7 +218,7 @@ static char *openurlcmd[] = { "/bin/sh", "-c",
     "sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./&%?#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'| uniq | sed 's/^www./http:\\/\\/www\\./g' | rofi -config '~/.config/rofi/rofi-themes/slate_with_prompt.rasi' -dmenu -i -p 'Open which url?' | xargs -r xdg-open",
     "externalpipe", NULL };
 static char *copyurlcmd[] = { "/bin/sh", "-c",
-    "sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./&%?#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' | rofi -dmenu -config '~/.config/rofi/rofi-themes/slate_with_prompt.rasi' -i -p 'Copy which url?' | tr -d '\n' | xset -b ",
+    "sed 's/.*│//g' | tr -d '\n' | grep -aEo '(((http|https)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./&%?#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' | uniq | sed 's/^www./http:\\/\\/www\\./g' | rofi -dmenu -config '~/.config/rofi/rofi-themes/slate_with_prompt.rasi' -i -p 'Copy which url?' | tr -d '\n' | xset - ",
     "externalpipe", NULL };
 static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 
