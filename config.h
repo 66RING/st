@@ -5,15 +5,17 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-//static char *font = "Liberation Mono:pixelsize=30:antialias=true:autohint=true";
-static char *font = "DejaVuSansMono Nerd Font Mono:pixelsize=25:antialias=true:autohint=true";
+#define FONT_SIZE ":pixelsize=20"
+#define FONT(font, size) font size
+
+static char *font = FONT("DejaVuSansMono Nerd Font Mono:antialias=true:autohint=true", FONT_SIZE);
 /* Spare fonts */
 static char *font2[] = {
-	"DejaVu Sans Mono for Powerline:pixelsize=24:antialias=true:autohint=true",
-	"Inconsolata for Powerline:pixelsize=24:antialias=true:autohint=true",
-	"twemoji:pixelsize=24:antialias=true:autohint=true",
-	"Source Han Sans CN:pixelsize=24:antialias=true:autohint=true",
-	"Source Han Serif CN:pixelsize=24:antialias=true:autohint=true",
+    FONT("DejaVu Sans Mono for Powerline:antialias=true:autohint=true", FONT_SIZE),
+	FONT("Inconsolata for Powerline:antialias=true:autohint=true", FONT_SIZE),
+	FONT("twemoji:antialias=true:autohint=true", ":pixelsize=19"),
+	FONT("Source Han Sans CN:antialias=true:autohint=true", FONT_SIZE),
+	FONT("Source Han Serif CN:antialias=true:autohint=true", FONT_SIZE),
 };
 
 static int borderpx = 4;
