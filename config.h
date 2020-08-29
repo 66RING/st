@@ -212,7 +212,6 @@ static MouseShortcut mshortcuts[] = {
 /* Internal keyboard shortcuts. */
 #define EQUL 0x3d
 #define MINS 0x2d
-#define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 // from @LukeSmithxyz
@@ -226,23 +225,24 @@ static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NUL
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
-	{ MODKEY,             XK_l,        externalpipe,  {.v = copyoutput } },
-	{ MODKEY,             XK_y,        externalpipe,  {.v = copyurlcmd } },
-	{ MODKEY,             XK_o,        externalpipe,  {.v = openurlcmd } },
-	{ XK_ANY_MOD,         XK_Break,    sendbreak,     {.i = 0}         },
-	{ ControlMask,        XK_Print,    toggleprinter, {.i = 0}         },
-	{ ShiftMask,          XK_Print,    printscreen,   {.i = 0}         },
-	{ XK_ANY_MOD,         XK_Print,    printsel,      {.i = 0}         },
-	{ ControlMask,        EQUL,        zoom,          {.f = +1}        },
-	{ ControlMask,        MINS,        zoom,          {.f = -1}        },
-	{ TERMMOD,            XK_Home,     zoomreset,     {.f = 0}         },
-	{ Mod1Mask,           XK_c,        clipcopy,      {.i = 0}         },
-	{ Mod1Mask,           XK_v,        clippaste,     {.i = 0}         },
-	{ TERMMOD,            XK_Num_Lock, numlock,       {.i = 0}         },
-	{ MODKEY,             XK_i,        kscrollup,     {.i = 1}         },
-	{ MODKEY,             XK_k,        kscrolldown,   {.i = 1}         },
-	{ MODKEY|ControlMask, XK_i,        kscrollup,     {.i = -1}        },
-	{ MODKEY|ControlMask, XK_k,        kscrolldown,   {.i = -1}        },
+	{ Mod1Mask,             XK_l,           externalpipe,  {.v = copyoutput } },
+	{ Mod1Mask,             XK_y,           externalpipe,  {.v = copyurlcmd } },
+	{ Mod1Mask,             XK_o,           externalpipe,  {.v = openurlcmd } },
+	{ XK_ANY_MOD,           XK_Break,       sendbreak,     {.i = 0}         },
+	{ ControlMask,          XK_Print,       toggleprinter, {.i = 0}         },
+	{ ShiftMask,            XK_Print,       printscreen,   {.i = 0}         },
+	{ XK_ANY_MOD,           XK_Print,       printsel,      {.i = 0}         },
+	{ ControlMask,          EQUL,           zoom,          {.f = +1}        },
+	{ ControlMask,          MINS,           zoom,          {.f = -1}        },
+	{ TERMMOD,              XK_Home,        zoomreset,     {.f = 0}         },
+	{ Mod1Mask,             XK_c,           clipcopy,      {.i = 0}         },
+	{ Mod1Mask,             XK_v,           clippaste,     {.i = 0}         },
+	{ TERMMOD,              XK_Num_Lock,    numlock,       {.i = 0}         },
+	{ Mod1Mask,             XK_Return,      newterm,       {.i = 0} },
+	{ Mod1Mask,             XK_i,           kscrollup,     {.i = 1}         },
+	{ Mod1Mask,             XK_k,           kscrolldown,   {.i = 1}         },
+	{ Mod1Mask|ControlMask, XK_i,           kscrollup,     {.i = -1}        },
+	{ Mod1Mask|ControlMask, XK_k,           kscrolldown,   {.i = -1}        },
 };
 
 /*
