@@ -634,11 +634,15 @@ ExitState kpressNormalMode(char const * cs, int len, bool ctrl, void const *v) {
 		// case 'j': sign = 1; FALLTHROUGH
 		// case 'k': moveLine(max(stateVB.motion.amount,1) * sign);
 		// 	  goto motionFinish;
-		case 'k': sign = 1; FALLTHROUGH
-		case 'K': sign = 1*3; FALLTHROUGH
+		// case 'K': sign = 1*3; FALLTHROUGH
+		// case 'k': sign = 1; FALLTHROUGH
+		case 'k': moveLine(max(stateVB.motion.amount,1) * sign * -1);
+			  goto motionFinish;
+		case 'K': moveLine(max(stateVB.motion.amount,1) * sign * 5 * -1);
+			  goto motionFinish;
 		case 'i': moveLine(max(stateVB.motion.amount,1) * sign);
 			  goto motionFinish;
-		case 'I': moveLine(max(stateVB.motion.amount,1) * sign * 3);
+		case 'I': moveLine(max(stateVB.motion.amount,1) * sign * 5);
 			  goto motionFinish;
 
 		case 'g': term.c.y = 0;  // to top
@@ -655,9 +659,13 @@ ExitState kpressNormalMode(char const * cs, int len, bool ctrl, void const *v) {
 		// case 'l': sign = 1; FALLTHROUGH
 		// case 'h': moveLetter(sign * max(stateVB.motion.amount,1));
 		// 	  goto motionFinish;
-		case 'L': sign = 1 * 3; FALLTHROUGH
-		case 'l': sign = 1; FALLTHROUGH
-		case 'J': moveLetter(sign * max(stateVB.motion.amount,1) * 3);
+		// case 'L': sign = 1 * 3; FALLTHROUGH
+		// case 'l': sign = 1; FALLTHROUGH
+		case 'L': moveLetter(sign * max(stateVB.motion.amount,1) * 5 * -1);
+			  goto motionFinish;
+		case 'l': moveLetter(sign * max(stateVB.motion.amount,1) * -1);
+			  goto motionFinish;
+		case 'J': moveLetter(sign * max(stateVB.motion.amount,1) * 5);
 			  goto motionFinish;
 		case 'j': moveLetter(sign * max(stateVB.motion.amount,1));
 			  goto motionFinish;
