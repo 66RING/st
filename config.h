@@ -8,11 +8,11 @@
 #define FONT_SIZE ":pixelsize=20"
 #define FONT(font, size) font size
 
-static char *font = FONT("DejaVuSansMono Nerd Font Mono:antialias=true:autohint=true", FONT_SIZE);
+static char *font = FONT("CaskaydiaCove Nerd Font Mono:antialias=true:autohint=true", FONT_SIZE);
 /* Spare fonts */
 static char *font2[] = {
-    FONT("DejaVu Sans Mono for Powerline:antialias=true:autohint=true", FONT_SIZE),
-	FONT("Inconsolata for Powerline:antialias=true:autohint=true", FONT_SIZE),
+    FONT("Cascadia Mono PL:antialias=true:autohint=true", ":pixelsize=26"),
+    FONT("Cascadia Code:antialias=true:autohint=true", FONT_SIZE),
 	FONT("twemoji:antialias=true:autohint=true", ":pixelsize=19"),
 	FONT("Source Han Sans CN:antialias=true:autohint=true", FONT_SIZE),
 	FONT("Source Han Serif CN:antialias=true:autohint=true", FONT_SIZE),
@@ -110,7 +110,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8;
+float alpha = 0.95;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
