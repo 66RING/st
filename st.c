@@ -1111,6 +1111,20 @@ newterm(const Arg* a)
 	}
 }
 
+void
+tabbed_newterm(const Arg* a)
+{
+	switch (fork()) {
+	case -1:
+		die("fork failed: %s\n", strerror(errno));
+		break;
+	case 0:
+		chdir(getcwd_by_pid(pid));
+		execlp("tabbed", "tabbed", "-c", "-n", "st", "-r", "2", "st", "-w", "''", NULL);
+		break;
+	}
+}
+
 static char *getcwd_by_pid(pid_t pid) {
 	char buf[32];
 	snprintf(buf, sizeof buf, "/proc/%d/cwd", pid);
