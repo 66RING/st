@@ -1106,7 +1106,7 @@ newterm(const Arg* a)
 		break;
 	case 0:
 		chdir(getcwd_by_pid(pid));
-		execlp("st", "./st", NULL);
+		execlp("tabbed", "tabbed", "-c", "-n", "st", "-r", "2", "st", "-w", "''", NULL);
 		break;
 	}
 }
@@ -1120,7 +1120,8 @@ tabbed_newterm(const Arg* a)
 		break;
 	case 0:
 		chdir(getcwd_by_pid(pid));
-		execlp("tabbed", "tabbed", "-c", "-n", "st", "-r", "2", "st", "-w", "''", NULL);
+		// Send st to tabbed window.
+		execlp("st", "./st", "-w", getenv("XEMBED"), NULL);
 		break;
 	}
 }

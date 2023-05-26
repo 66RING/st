@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-#define FONT_SIZE ":pixelsize=20"
+#define FONT_SIZE ":pixelsize=24"
 #define FONT(font, size) font size
 
 static char *font = FONT("CaskaydiaCove Nerd Font Mono:antialias=true:autohint=true", FONT_SIZE);
@@ -250,8 +250,9 @@ static Shortcut shortcuts[] = {
 	{ Mod1Mask,             XK_c,           clipcopy,      {.i = 0}         },
 	{ Mod1Mask,             XK_v,           clippaste,     {.i = 0}         },
 	{ TERMMOD,              XK_Num_Lock,    numlock,       {.i = 0}         },
-	{ Mod1Mask,             XK_Return,      tabbed_newterm,{.i = 0} },
-	{ Mod1Mask,             XK_space,       normalMode,    {.i =  0} },
+	{ Mod1Mask,             XK_Return,      newterm,       {.i = 0}			},
+	{ Mod1Mask,             XK_n,           tabbed_newterm,{.i = 0}			},
+	{ Mod1Mask,             XK_space,       normalMode,    {.i = 0}			},
 	{ Mod1Mask,             XK_i,           kscrollup,     {.i = 1}         },
 	{ Mod1Mask,             XK_k,           kscrolldown,   {.i = 1}         },
 	{ Mod1Mask|ControlMask, XK_i,           kscrollup,     {.i = -1}        },
