@@ -1106,7 +1106,7 @@ newterm(const Arg* a)
 		break;
 	case 0:
 		chdir(getcwd_by_pid(pid));
-		execlp("tabbed", "tabbed", "-c", "-n", "st", "-r", "2", "st", "-w", "''", NULL);
+		execlp("tabbed", "tabbed", "-c", "-p", "-s+1", "-n", "st", "-r", "2", "st", "-w", "''", NULL);
 		break;
 	}
 }
